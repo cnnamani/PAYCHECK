@@ -25,7 +25,7 @@ def my_pay():
     week = int(input("How many weeks did you work? "))
     # maximum week one can work before receiving paycheck
     max_week = 2
-
+#
     if hours_worked < weekly_max_hour  and week < max_week  and week >0:
         earning_before_tax= hourly_pay * hours_worked + weekly_vacation_pay
         earning_after_tax= earning_before_tax -(Total_tax*earning_before_tax)

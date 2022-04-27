@@ -16,6 +16,7 @@ def my_pay():
     # Tota deduction in percentage
     Total_tax = 0.2046
     weekly_max_hour = 40.0
+    bi_weekly_max_hours = 80
     # your hourly pay
     hourly_pay = float(input("how much do you earn per hour? "))
     # total number of hours worked
@@ -25,32 +26,68 @@ def my_pay():
     # maximum week one can work before receiving paycheck
     max_week = 2
 
-    if hours_worked <= weekly_max_hour and week < max_week  and week >0:
+    if hours_worked < weekly_max_hour  and week < max_week  and week >0:
+        earning_before_tax= hourly_pay * hours_worked + weekly_vacation_pay
+        earning_after_tax= earning_before_tax -(Total_tax*earning_before_tax)
+        print(f"this is your first week and your pay is:{earning_before_tax} ") 
+        print(f"{earning_after_tax}: after tax.")
+   
+    if hours_worked == weekly_max_hour  and week < max_week  and week >0:
         earning_before_tax1= hourly_pay * hours_worked + weekly_vacation_pay
         earning_after_tax1 = earning_before_tax1 -(Total_tax*earning_before_tax1)
-        print(f"this is your first week and your pay is:{earning_before_tax1}") 
+        print(f"You have only worked one week in two weeks and your pay is:{earning_before_tax1} and") 
+        print(f"{earning_after_tax1}: after tax.")
+   
         
-    elif hours_worked >weekly_max_hour  and week < max_week and week >0:
+    elif hours_worked >weekly_max_hour  and hours_worked < bi_weekly_max_hours and week < max_week and week >0 :
         over_time = (hourly_pay * 1.5) * hours_worked + weekly_vacation_pay
         earning_after_tax2 = over_time - (Total_tax * over_time)
-        print(f'Hello!, this is your first week and you have earned: {over_time}  ')
+        print(f'Hello!, this is your first week and you worked overtime and have earned: {over_time}  ')
         print(f'{earning_after_tax2} after tax deduction') 
 
-    elif hours_worked < weekly_max_hour  and week == max_week and week >0:
+    elif hours_worked >weekly_max_hour  and hours_worked == bi_weekly_max_hours and week == max_week :
+        total_pay = hourly_pay  * hours_worked + (weekly_vacation_pay*2)
+        earning_after_tax2 = total_pay - (Total_tax * total_pay)
+        print(f'Hello!, this is your second  week and you have earned: {total_pay} in total  ')
+        print(f'{earning_after_tax2} after tax deduction')
+
+
+    elif hours_worked > weekly_max_hour and hours_worked < bi_weekly_max_hours and week == max_week:
+        total_pay = hourly_pay * hours_worked + (weekly_vacation_pay * 2)
+        earning_after_tax2 = total_pay - (Total_tax * total_pay)
+        print(f'Hello!, this is your second  week and you have earned: {total_pay} in total  ')
+        print(f'{earning_after_tax2} after tax deduction')
+
+    elif hours_worked < weekly_max_hour   and week == max_week :
         earning_before_tax3 = (hourly_pay * hours_worked) + (weekly_vacation_pay*2)
         earning_after_tax3 = earning_before_tax3 - (Total_tax*earning_before_tax3)
-        print(f"Hi! your earning is {earning_before_tax3} before tax")
+        print(f"Hi! {earning_before_tax3} is your two weeks pay before tax")
         print(f"{earning_after_tax3} after tax deductions.") 
 
-    elif hours_worked >=weekly_max_hour  and week == max_week and week >0:
+    elif hours_worked == weekly_max_hour   and week == max_week  :
         earning_before_tax4 = (hourly_pay * hours_worked) + (weekly_vacation_pay * 2)
         earning_after_tax4 = earning_before_tax4 - (Total_tax*earning_before_tax4)
-        print(f"Hi! you earnig is {earning_before_tax4} before tax and {earning_after_tax4} after tax deductions.")
+        print(f"Hi! your two weeks pay is {earning_before_tax4} before tax")
+        print(f" ${earning_after_tax4} after tax deductions.")
+
+    elif hours_worked > weekly_max_hour  and hours_worked > bi_weekly_max_hours and week == max_week :
+        total_overtime = (hourly_pay * 1.5) * hours_worked + (weekly_vacation_pay*2)
+        earning_after_tax5 = total_overtime - (Total_tax*total_overtime)
+        print(f"Your total earning in two weeks including your overtime before tax is ${total_overtime}")
+        print(f"${earning_after_tax5}: after tax deduction")                    
+    
+    elif hours_worked > weekly_max_hour  and hours_worked > bi_weekly_max_hours and week < max_week and week >0 :
+        total_overtime = (hourly_pay * 1.5) * hours_worked + (weekly_vacation_pay*2)
+        earning_after_tax5 = total_overtime - (Total_tax*total_overtime)
+        print(f"Your total earning in two weeks including your overtime before tax is ${total_overtime}")
+        print(f"${earning_after_tax5}: after tax deduction")
+
+ 
     elif hours_worked ==0 and week == 0:
         print("enjoy your break")
     else :
-        if week > 2 and hours_worked >0 and hourly_pay >0:
-            print("week can't be more than 2 thanks!")
+        if week > max_week and hours_worked >=0 and hourly_pay >=0:
+            print("please check with the HR!")
         
            
 
